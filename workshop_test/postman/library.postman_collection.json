@@ -1,0 +1,297 @@
+{
+	"info": {
+		"_postman_id": "d040dd1d-7965-46dc-a6d9-c504f651e9d5",
+		"name": "workshop_test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Insert books",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonData = pm.response.json();",
+							"",
+							"pm.test(\"should have key mongo_id\", function () {",
+							"    pm.expect(jsonData.data).to.have.property('library_id');",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			 "request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"Name\" : \"โตขึ้นมาเป็นความสุข\",\n    \"Picture_url\": \"https://www.google.com/search?q=%E0%B9%82%E0%B8%95%E0%B8%82%E0%B8%B6%E0%B9%89%E0%B8%99%E0%B8%A1%E0%B8%B2%E0%B9%80%E0%B8%9B%E0%B9%87%E0%B8%99%E0%B8%84%E0%B8%A7%E0%B8%B2%E0%B8%A1%E0%B8%AA%E0%B8%B8%E0%B8%82&rlz=1C1GCEA_enTH876TH876&source=lnms&tbm=isch&sa=X&ved=2ahUKEwjIx4iYnbrvAhXazjgGHXwZB80Q_AUoAXoECAEQAw&biw=1536&bih=754&fbclid=IwAR1yXmnKlaPznZBkpIQHSHWZGHJ37S4lrZ-3xv8U95w2zMdhG9W5eYhh-3g#imgrc=kuSfipeXdr_tRM\",\n    \"ID\" : \"N1234\",\n    \"Price\" : 213.75 BAHT,\n    \"Stories\" : \"หนังสือว่าด้วยการใช้ชีวิตในวัยผู้ใหญ่ให้มีความสุข ซึ่งเขียนขึ้นเพื่อหาคำตอบร่วมกันระหว่างคนเขียนกับคนอ่านว่า เราจะทำอย่างไรกับชีวิตได้บ้าง เพื่อที่จะมีความสุขกับชีวิต ประกอบด้วย 30 บทความที่ให้แง่คิดดี ๆ ทั้งการดำเนินชีวิต การทำงาน และการอยู่คนเดียวให้เป็น ที่สร้างความรู้สึกร่วมกับคนรุ่นใหม่ยุคนี้ อ่านแล้วคุณจะได้พบหนทางของความสุขของตนเอง,\n  \"Number of pages\" : \"192 Page\n  \"Volume image size\" : \"125 * 175 * 10 มม.\n  \"Paper texture\" : \"คละสี\n  \"Paper type\" : \"กระดาษถนอมสายตา\n  \"Publisher\" : \"springbooks\n  \"Mouth year of Publication\" : \"2020\n}\n"
+				},
+				"url": {
+					"raw": "{{apiUrl}}/Librarys",
+					"host": [
+						"{{apiUrl}}"
+					],
+					"path": [
+						"Librarys"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Find books",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonData = pm.response.json();",
+							"",
+							"pm.test(\"Should return data json 12 fields\", function () {",
+							"    pm.expect(Object.keys(jsonData.data[0]).length).to.eql(12);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{apiUrl}}/Librarys/",
+					"host": [
+						"{{apiUrl}}"
+					],
+					"path": [
+						"Librarys",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Find books sort by price order by asc",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonData = pm.response.json();",
+							"",
+							"pm.test(\"Should return data json 12 fields\", function () {",
+							"    pm.expect(Object.keys(jsonData.data[0]).length).to.eql(12);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{apiUrl}}/librarys/?sort_by=price&order=asc",
+					"host": [
+						"{{apiUrl}}"
+					],
+					"path": [
+						"Librarys",
+						""
+					],
+					"query": [
+						{
+							"key": "sort_by",
+							"value": "price"
+						},
+						{
+							"key": "order",
+							"value": "asc"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Find books sort by price order by desc",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonData = pm.response.json();",
+							"",
+							"pm.test(\"Should return data json 12 fields\", function () {",
+							"    pm.expect(Object.keys(jsonData.data[0]).length).to.eql(12);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{apiUrl}}/librarys/?sort_by=price&order=desc",
+					"host": [
+						"{{apiUrl}}"
+					],
+					"path": [
+						"Librarys",
+						""
+					],
+					"query": [
+						{
+							"key": "sort_by",
+							"value": "price"
+						},
+						{
+							"key": "order",
+							"value": "desc"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update books",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonData = pm.response.json();",
+							"",
+							"pm.test(\"should have key mongo_id\", function () {",
+							"    pm.expect(jsonData.data).to.have.property('library_id');",
+							"})",
+							"",
+							"pm.test(\"should have key modified_count\", function () {",
+							"    pm.expect(jsonData.data).to.have.property('modified_count');",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"price\" : 213\n}"
+				},
+				"url": {
+					"raw": "{{apiUrl}}/Librarys/N1234",
+					"host": [
+						"{{apiUrl}}"
+					],
+					"path": [
+						"Librarys",
+						"N1234"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Find books by id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonData = pm.response.json();",
+							"",
+							"pm.test(\"Should return data json 12 fields\", function () {",
+							"    pm.expect(Object.keys(jsonData.data).length).to.eql(12);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{apiUrl}}/librarys/N1234",
+					"host": [
+						"{{apiUrl}}"
+					],
+					"path": [
+						"Librarys",
+						"N1234"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete books",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonData = pm.response.json();",
+							"",
+							"pm.test(\"should have key mongo_id\", function () {",
+							"    pm.expect(jsonData.data).to.have.property('library_id');",
+							"})",
+							"",
+							"pm.test(\"should have key deleted_count\", function () {",
+							"    pm.expect(jsonData.data).to.have.property('deleted_count');",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "var jsonData = pm.response.json();\n\npm.test(\"should have key mongo_id\", function () {\n    pm.expect(jsonData.data).to.have.property('library_id');\n})\n\npm.test(\"should have key modified_count\", function () {\n    pm.expect(jsonData.data).to.have.property('deleted_count');\n})"
+				},
+				"url": {
+					"raw": "{{apiUrl}}/librarys/5630252488",
+					"host": [
+						"{{apiUrl}}"
+					],
+					"path": [
+						"Librarys",
+						"N1234"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
